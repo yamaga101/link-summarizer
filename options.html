@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Link Summarizer - 設定</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Link Summarizer 設定</h1>
+
+    <div class="card">
+      <label for="api-key">Gemini API キー</label>
+      <input type="password" id="api-key" placeholder="AIza..." autocomplete="off">
+      <p class="hint">
+        APIキーは <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">Google AI Studio</a> から取得できます（無料）
+      </p>
+      <button id="save-btn">保存</button>
+      <p id="status" class="status" hidden></p>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

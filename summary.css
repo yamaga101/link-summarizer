@@ -1,0 +1,706 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #f0f2f5;
+  color: #333;
+  line-height: 1.7;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+header h1 {
+  font-size: 1.25rem;
+  color: #666;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.error-card {
+  border-left: 4px solid #e53e3e;
+}
+
+.error-card h2 {
+  color: #e53e3e;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.error-card p {
+  margin-bottom: 12px;
+}
+
+/* Loading */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #4a90d9;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 12px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  text-align: center;
+  color: #888;
+}
+
+/* Meta */
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-youtube {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.badge-web {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.source-link {
+  font-size: 0.85rem;
+  color: #4a90d9;
+  text-decoration: none;
+}
+
+.source-link:hover {
+  text-decoration: underline;
+}
+
+/* Title */
+#title {
+  font-size: 1.4rem;
+  margin-bottom: 24px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+/* ==============================
+   Summary Content Base
+   ============================== */
+
+.summary-content {
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.summary-content h2 {
+  font-size: 1.2rem;
+  margin: 28px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e2e8f0;
+  color: #1a1a2e;
+}
+
+.summary-content h3 {
+  font-size: 1.05rem;
+  margin: 20px 0 8px;
+  color: #2d3748;
+}
+
+.summary-content h4 {
+  font-size: 0.95rem;
+  margin: 16px 0 6px;
+  color: #4a5568;
+}
+
+.summary-content p {
+  margin-bottom: 12px;
+}
+
+.summary-content ul,
+.summary-content ol {
+  padding-left: 24px;
+  margin: 8px 0 16px;
+}
+
+.summary-content li {
+  margin-bottom: 6px;
+}
+
+.summary-content strong {
+  color: #1a1a2e;
+}
+
+.summary-content blockquote {
+  border-left: 3px solid #4a90d9;
+  padding: 8px 16px;
+  margin: 12px 0;
+  background: #f7fafc;
+  border-radius: 0 8px 8px 0;
+  color: #4a5568;
+  font-style: italic;
+}
+
+/* ==============================
+   Diagram: Flow Chart
+   ============================== */
+
+.diagram-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 20px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8fafc, #eef2f7);
+  border-radius: 12px;
+}
+
+.diagram-flow .flow-step {
+  background: #fff;
+  border: 2px solid #4a90d9;
+  border-radius: 10px;
+  padding: 12px 18px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2d3748;
+  min-width: 100px;
+  box-shadow: 0 2px 4px rgba(74, 144, 217, 0.15);
+  position: relative;
+}
+
+.diagram-flow .flow-step.highlight {
+  background: #4a90d9;
+  color: #fff;
+  border-color: #3a7bc8;
+}
+
+.diagram-flow .flow-step .flow-sub {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #718096;
+  margin-top: 4px;
+}
+
+.diagram-flow .flow-step.highlight .flow-sub {
+  color: #bee3f8;
+}
+
+.diagram-flow .flow-arrow {
+  font-size: 1.2rem;
+  color: #4a90d9;
+  padding: 0 8px;
+  font-weight: 700;
+}
+
+/* Vertical flow */
+.diagram-flow.vertical {
+  flex-direction: column;
+}
+
+.diagram-flow.vertical .flow-arrow {
+  transform: rotate(90deg);
+  padding: 6px 0;
+}
+
+/* ==============================
+   Diagram: Comparison Cards
+   ============================== */
+
+.diagram-compare {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.diagram-compare .compare-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.diagram-compare .compare-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.diagram-compare .compare-card .compare-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.diagram-compare .compare-card:nth-child(1) .compare-title { color: #2563eb; border-color: #93c5fd; }
+.diagram-compare .compare-card:nth-child(2) .compare-title { color: #059669; border-color: #6ee7b7; }
+.diagram-compare .compare-card:nth-child(3) .compare-title { color: #d97706; border-color: #fcd34d; }
+.diagram-compare .compare-card:nth-child(4) .compare-title { color: #dc2626; border-color: #fca5a5; }
+
+.diagram-compare .compare-card .compare-body {
+  font-size: 0.85rem;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.diagram-compare .compare-card .compare-body ul {
+  list-style: none;
+  padding: 0;
+}
+
+.diagram-compare .compare-card .compare-body li {
+  padding: 3px 0;
+}
+
+.diagram-compare .compare-card .compare-body li::before {
+  content: "→ ";
+  color: #a0aec0;
+}
+
+/* ==============================
+   Diagram: Process Steps
+   ============================== */
+
+.diagram-steps {
+  margin: 20px 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step-counter;
+}
+
+.diagram-steps .step {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 4px;
+  position: relative;
+}
+
+.diagram-steps .step:last-child .step-line { display: none; }
+
+.diagram-steps .step-number {
+  width: 36px;
+  height: 36px;
+  background: #4a90d9;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.diagram-steps .step-line {
+  position: absolute;
+  left: 17px;
+  top: 36px;
+  width: 2px;
+  bottom: 0;
+  background: #cbd5e0;
+}
+
+.diagram-steps .step-content {
+  padding: 4px 0 20px;
+}
+
+.diagram-steps .step-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #2d3748;
+  margin-bottom: 4px;
+}
+
+.diagram-steps .step-desc {
+  font-size: 0.85rem;
+  color: #718096;
+  line-height: 1.5;
+}
+
+/* ==============================
+   Diagram: Stats / Metrics
+   ============================== */
+
+.diagram-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.diagram-stats .stat-card {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 12px;
+  padding: 20px 16px;
+  text-align: center;
+  color: #fff;
+}
+
+.diagram-stats .stat-card:nth-child(2) { background: linear-gradient(135deg, #f093fb, #f5576c); }
+.diagram-stats .stat-card:nth-child(3) { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+.diagram-stats .stat-card:nth-child(4) { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+
+.diagram-stats .stat-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.diagram-stats .stat-label {
+  font-size: 0.75rem;
+  opacity: 0.85;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ==============================
+   Diagram: Info / Callout Box
+   ============================== */
+
+.diagram-info {
+  margin: 20px 0;
+  padding: 16px 20px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.diagram-info.info-blue {
+  background: #ebf5ff;
+  border-left: 4px solid #4a90d9;
+  color: #1e40af;
+}
+
+.diagram-info.info-green {
+  background: #ecfdf5;
+  border-left: 4px solid #10b981;
+  color: #065f46;
+}
+
+.diagram-info.info-yellow {
+  background: #fffbeb;
+  border-left: 4px solid #f59e0b;
+  color: #92400e;
+}
+
+.diagram-info.info-red {
+  background: #fef2f2;
+  border-left: 4px solid #ef4444;
+  color: #991b1b;
+}
+
+.diagram-info .info-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* ==============================
+   Diagram: Styled Table
+   ============================== */
+
+.diagram-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  font-size: 0.85rem;
+}
+
+.diagram-table thead th {
+  background: #2d3748;
+  color: #fff;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.diagram-table tbody td {
+  padding: 10px 16px;
+  border-bottom: 1px solid #edf2f7;
+  color: #4a5568;
+}
+
+.diagram-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.diagram-table tbody tr:nth-child(even) {
+  background: #f7fafc;
+}
+
+.diagram-table tbody tr:hover {
+  background: #edf2f7;
+}
+
+/* ==============================
+   Diagram: Timeline
+   ============================== */
+
+.diagram-timeline {
+  margin: 20px 0;
+  padding-left: 24px;
+  border-left: 3px solid #e2e8f0;
+  position: relative;
+}
+
+.diagram-timeline .tl-item {
+  position: relative;
+  padding: 0 0 24px 20px;
+}
+
+.diagram-timeline .tl-item:last-child {
+  padding-bottom: 0;
+}
+
+.diagram-timeline .tl-item::before {
+  content: "";
+  position: absolute;
+  left: -31px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #4a90d9;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px #4a90d9;
+}
+
+.diagram-timeline .tl-item:first-child::before {
+  background: #2563eb;
+  box-shadow: 0 0 0 2px #2563eb;
+}
+
+.diagram-timeline .tl-time {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #4a90d9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.diagram-timeline .tl-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #2d3748;
+  margin: 2px 0;
+}
+
+.diagram-timeline .tl-desc {
+  font-size: 0.85rem;
+  color: #718096;
+  line-height: 1.5;
+}
+
+/* ==============================
+   Diagram: Relationship / Hub
+   ============================== */
+
+.diagram-hub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+  padding: 24px;
+  background: linear-gradient(135deg, #f8fafc, #eef2f7);
+  border-radius: 12px;
+  position: relative;
+}
+
+.diagram-hub .hub-center {
+  background: #2563eb;
+  color: #fff;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 8px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  z-index: 1;
+}
+
+.diagram-hub .hub-node {
+  background: #fff;
+  border: 2px solid #93c5fd;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2d3748;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* ==============================
+   Diagram: Pros/Cons
+   ============================== */
+
+.diagram-proscons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.diagram-proscons .pros,
+.diagram-proscons .cons {
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.diagram-proscons .pros {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+}
+
+.diagram-proscons .cons {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+.diagram-proscons .pros .pc-title {
+  color: #059669;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.diagram-proscons .cons .pc-title {
+  color: #dc2626;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.diagram-proscons ul {
+  list-style: none;
+  padding: 0;
+}
+
+.diagram-proscons li {
+  padding: 4px 0;
+  font-size: 0.85rem;
+  color: #4a5568;
+}
+
+.diagram-proscons .pros li::before { content: "✓ "; color: #059669; font-weight: 700; }
+.diagram-proscons .cons li::before { content: "✗ "; color: #dc2626; font-weight: 700; }
+
+/* ==============================
+   Diagram: Percentage Bar
+   ============================== */
+
+.diagram-bars {
+  margin: 20px 0;
+}
+
+.diagram-bars .bar-item {
+  margin-bottom: 12px;
+}
+
+.diagram-bars .bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 4px;
+}
+
+.diagram-bars .bar-track {
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.diagram-bars .bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #4a90d9, #667eea);
+  transition: width 0.6s ease;
+}
+
+.diagram-bars .bar-item:nth-child(2) .bar-fill { background: linear-gradient(90deg, #10b981, #34d399); }
+.diagram-bars .bar-item:nth-child(3) .bar-fill { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.diagram-bars .bar-item:nth-child(4) .bar-fill { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+/* ==============================
+   Footer
+   ============================== */
+
+footer {
+  margin-top: 24px;
+  text-align: center;
+}
+
+footer a {
+  font-size: 0.85rem;
+  color: #999;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #666;
+}
+
+/* ==============================
+   Responsive
+   ============================== */
+
+@media (max-width: 600px) {
+  .diagram-compare { grid-template-columns: 1fr; }
+  .diagram-proscons { grid-template-columns: 1fr; }
+  .diagram-flow { flex-direction: column; }
+  .diagram-flow .flow-arrow { transform: rotate(90deg); padding: 4px 0; }
+  .diagram-stats { grid-template-columns: repeat(2, 1fr); }
+}

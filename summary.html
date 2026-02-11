@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Link Summarizer - 要約結果</title>
+  <link rel="stylesheet" href="summary.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Link Summarizer</h1>
+    </header>
+
+    <main id="content">
+      <!-- Loading State -->
+      <div id="loading" class="card">
+        <div class="spinner"></div>
+        <p class="loading-text">要約を生成中...</p>
+      </div>
+
+      <!-- Result State -->
+      <div id="result" class="card" hidden>
+        <div class="meta">
+          <span id="source-type" class="badge"></span>
+          <a id="source-url" href="#" target="_blank" rel="noopener noreferrer" class="source-link">元のリンクを開く</a>
+        </div>
+        <h2 id="title"></h2>
+        <div id="summary" class="summary-content"></div>
+      </div>
+
+      <!-- Error State -->
+      <div id="error" class="card error-card" hidden>
+        <h2>エラーが発生しました</h2>
+        <p id="error-message"></p>
+        <a id="error-url" href="#" target="_blank" rel="noopener noreferrer" class="source-link">元のリンクを開く</a>
+      </div>
+    </main>
+
+    <footer>
+      <a href="#" id="options-link">設定</a>
+    </footer>
+  </div>
+
+  <script src="summary.js"></script>
+</body>
+</html>

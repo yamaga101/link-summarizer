@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Link Summarizer",
+  "version": "2.1.2",
+  "description": "右クリックメニューからリンク先のYouTube動画やウェブ記事をAIで要約します",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://*.youtube.com/*",
+    "https://generativelanguage.googleapis.com/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
