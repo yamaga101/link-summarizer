@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const response = await chrome.runtime.sendNativeMessage(
         'com.yamaga101.gitpull',
-        { repo: 'link-summarizer' }
+        { repo: 'cx-link' }
       );
       btn.textContent = response.success ? '✅ 完了' : '❌ 失敗';
       btn.title = response.output || '';
