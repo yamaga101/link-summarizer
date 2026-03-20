@@ -28,4 +28,28 @@ document.addEventListener("DOMContentLoaded", async () => {
       statusEl.hidden = true;
     }, 3000);
   }
+
+  // Native Messaging update button
+  document.getElementById('updateBtn')?.addEventListener('click', async () => {
+    const btn = document.getElementById('updateBtn');
+    const origText = btn.textContent;
+    btn.textContent = '⏳ 実行中...';
+    btn.style.pointerEvents = 'none';
+    try {
+      const response = await chrome.runtime.sendNativeMessage(
+        'com.yamaga101.gitpull',
+        { repo: 'link-summarizer' }
+      );
+      btn.textContent = response.success ? '✅ 完了' : '❌ 失敗';
+      btn.title = response.output || '';
+    } catch (e) {
+      btn.textContent = '❌ 失敗';
+      btn.title = e.message || 'Native host not installed';
+    }
+    setTimeout(() => {
+      btn.textContent = origText;
+      btn.style.pointerEvents = '';
+      btn.title = 'git pull で最新に更新';
+    }, 3000);
+  });
 });

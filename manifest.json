@@ -1,14 +1,16 @@
 {
   "manifest_version": 3,
   "name": "Link Summarizer",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "右クリック要約 + タブ一括ダイジェスト。溜まったタブをジャンル別にAI整理",
   "permissions": [
     "contextMenus",
     "storage",
     "activeTab",
     "tabs",
-    "tabGroups"
+    "tabGroups",
+    "alarms",
+    "nativeMessaging"
   ],
   "host_permissions": [
     "https://*.youtube.com/*",

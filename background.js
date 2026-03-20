@@ -1,3 +1,5 @@
+importScripts('auto-reload.js');
+
 const GEMINI_API_URL =
   "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent";
 const MAX_TEXT_LENGTH = 30000;
