@@ -9,23 +9,39 @@ document.addEventListener("DOMContentLoaded", () => {
   pollForResult();
 });
 
-function pollForResult() {
-  const check = async () => {
-    const { summaryData } = await chrome.storage.local.get("summaryData");
-    if (!summaryData) return;
+function getStorageKey() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  return id ? `summary_${id}` : null;
+}
 
-    if (summaryData.status === "loading") {
+function pollForResult() {
+  const storageKey = getStorageKey();
+  if (!storageKey) {
+    showError({ error: "要約IDが見つかりません。" });
+    return;
+  }
+
+  const check = async () => {
+    const result = await chrome.storage.local.get(storageKey);
+    const data = result[storageKey];
+    if (!data) return;
+
+    if (data.status === "loading") {
       setTimeout(check, POLL_INTERVAL_MS);
       return;
     }
 
-    if (summaryData.status === "error") {
-      showError(summaryData);
+    // Clean up storage after displaying
+    chrome.storage.local.remove(storageKey);
+
+    if (data.status === "error") {
+      showError(data);
       return;
     }
 
-    if (summaryData.status === "done") {
-      showResult(summaryData);
+    if (data.status === "done") {
+      showResult(data);
     }
   };
   check();
@@ -53,7 +69,8 @@ function showError(data) {
   errorEl.hidden = false;
 
   document.getElementById("error-message").textContent = data.error;
-  document.getElementById("error-url").href = data.url || "#";
+  const errorUrl = document.getElementById("error-url");
+  if (errorUrl) errorUrl.href = data.url || "#";
 }
 
 function sanitizeHtml(html) {

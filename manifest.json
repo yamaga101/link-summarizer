@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Link Summarizer",
-    "version": "2.3.2",
+    "version": "2.3.3",
     "description": "右クリック要約 + タブ一括ダイジェスト。溜まったタブをジャンル別にAI整理",
     "permissions": [
         "contextMenus",

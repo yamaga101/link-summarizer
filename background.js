@@ -66,11 +66,13 @@ async function handleVoiceSummarize({ audioData, mimeType, tabTitle, tabUrl }) {
     return { error: "APIキーが未設定です。" };
   }
 
-  // Save loading state and open summary tab
+  // Save loading state and open summary tab with unique ID
+  const summaryId = generateSummaryId();
+  const storageKey = `summary_${summaryId}`;
   await chrome.storage.local.set({
-    summaryData: { status: "loading", url: tabUrl },
+    [storageKey]: { status: "loading", url: tabUrl },
   });
-  await chrome.tabs.create({ url: chrome.runtime.getURL("summary.html"), active: false });
+  await chrome.tabs.create({ url: chrome.runtime.getURL(`summary.html?id=${summaryId}`), active: false });
 
   try {
     const response = await fetch(`${GEMINI_API_URL}?key=${apiKey}`, {
@@ -115,7 +117,7 @@ async function handleVoiceSummarize({ audioData, mimeType, tabTitle, tabUrl }) {
     if (!text) throw new Error("応答なし");
 
     await chrome.storage.local.set({
-      summaryData: {
+      [storageKey]: {
         status: "done",
         url: tabUrl,
         title: tabTitle,
@@ -127,7 +129,7 @@ async function handleVoiceSummarize({ audioData, mimeType, tabTitle, tabUrl }) {
     return { success: true };
   } catch (error) {
     await chrome.storage.local.set({
-      summaryData: { status: "error", url: tabUrl, error: error.message },
+      [storageKey]: { status: "error", url: tabUrl, error: error.message },
     });
     return { error: error.message };
   }
@@ -303,22 +305,28 @@ ${tabList}
 // ---------- Main Flow ----------
 
 async function handleSummarize(url) {
-  // Save loading state and open summary tab immediately
+  const summaryId = generateSummaryId();
+  const storageKey = `summary_${summaryId}`;
+
+  // Save loading state and open summary tab with ID
   await chrome.storage.local.set({
-    summaryData: { status: "loading", url },
+    [storageKey]: { status: "loading", url },
   });
   await chrome.tabs.create({
-    url: chrome.runtime.getURL("summary.html"),
+    url: chrome.runtime.getURL(`summary.html?id=${summaryId}`),
     active: false,
   });
 
   try {
     const apiKey = await getApiKey();
     if (!apiKey) {
-      await saveSummaryError(
-        url,
-        "APIキーが設定されていません。設定ページからGemini APIキーを入力してください。"
-      );
+      await chrome.storage.local.set({
+        [storageKey]: {
+          status: "error",
+          url,
+          error: "APIキーが設定されていません。設定ページからGemini APIキーを入力してください。",
+        },
+      });
       return;
     }
 
@@ -326,7 +334,7 @@ async function handleSummarize(url) {
     const summary = await callGeminiApi(apiKey, content);
 
     await chrome.storage.local.set({
-      summaryData: {
+      [storageKey]: {
         status: "done",
         url,
         title: content.title,
@@ -336,14 +344,14 @@ async function handleSummarize(url) {
     });
   } catch (error) {
     console.error("Link Summarizer error:", error);
-    await saveSummaryError(url, error.message);
+    await chrome.storage.local.set({
+      [storageKey]: { status: "error", url, error: error.message },
+    });
   }
 }
 
-async function saveSummaryError(url, message) {
-  await chrome.storage.local.set({
-    summaryData: { status: "error", url, error: message },
-  });
+function generateSummaryId() {
+  return `${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 }
 
 // ---------- API Key ----------
